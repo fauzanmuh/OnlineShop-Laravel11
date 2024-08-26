@@ -8,4 +8,37 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'kategoris_id',
+        'brands_id',
+        'name',
+        'slug',
+        'image',
+        'description',
+        'price',
+        'is_active',
+        'is_featured',
+        'in_stock',
+        'on_sale',
+    ];
+
+    protected $casts = [
+        'image' => 'array',
+    ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }
