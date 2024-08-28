@@ -28,6 +28,15 @@ class ProdukResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
+    public static function getNavigationLabel(): string
+    {
+        return 'Produk';
+    }
+    public static function getPluralLabel(): string
+    {
+        return 'Produk';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

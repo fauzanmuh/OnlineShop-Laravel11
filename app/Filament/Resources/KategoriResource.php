@@ -21,6 +21,15 @@ class KategoriResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    public static function getNavigationLabel(): string
+    {
+        return 'Kategori';
+    }
+    public static function getPluralLabel(): string
+    {
+        return 'Kategori';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
