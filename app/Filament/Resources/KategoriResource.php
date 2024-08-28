@@ -36,9 +36,6 @@ class KategoriResource extends Resource
                     ->disabled()
                     ->dehydrated()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->directory('kategoris'),
                 Forms\Components\Toggle::make('is_active')
                     ->required()
                     ->default(true),
@@ -51,7 +48,6 @@ class KategoriResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
