@@ -69,7 +69,7 @@ class AlamatRelationManager extends RelationManager
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('fullname')
-                    ->label('Nama')
+                    ->label('Nama Penerima')
                     ->searchable()
                     ->sortable(),
                 
