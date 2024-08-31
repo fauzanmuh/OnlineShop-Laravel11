@@ -65,31 +65,25 @@ class AlamatRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('street_address')
                     ->label('Alamat')
-                    ->searchable()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('fullname')
                     ->label('Nama Penerima')
-                    ->searchable()
                     ->sortable(),
                 
                 Tables\Columns\TextColumn::make('phone')
-                    ->label('Nomor Telepon')
-                    ->searchable(),
+                    ->label('Nomor Telepon'),
 
                 Tables\Columns\TextColumn::make('city')
                     ->label('Kota')
-                    ->searchable()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('state')
                     ->label('Provinsi')
-                    ->searchable()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('zip_code')
                     ->label('Kode Pos')
-                    ->searchable()
                     ->sortable(),
             ])
             ->filters([
