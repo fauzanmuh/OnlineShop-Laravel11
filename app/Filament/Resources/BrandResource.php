@@ -20,7 +20,7 @@ class BrandResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
-    
+    protected static ?int $navigationSort = 3;
     public static function getNavigationLabel(): string
     {
         return 'Brand';
