@@ -5,12 +5,13 @@
                 <div class="w-full pr-2 lg:w-1/4 lg:block">
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-900">
                         <h2 class="text-2xl font-bold dark:text-gray-400"> Kategori</h2>
+                        
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             @foreach ($kategori as $k)
                             <li class="mb-4" wire:key="{{ $k->id }}">
                                 <label for="{{ $k->slug }}" class="flex items-center dark:text-gray-400 ">
-                                    <input type="checkbox" id="{{ $k->slug }}" value="{{ $k->id }}" class="w-4 h-4 mr-2">
+                                    <input type="checkbox" wire:model.live="selected_kategori" id="{{ $k->slug }}" value="{{ $k->id }}" class="w-4 h-4 mr-2">
                                     <span class="text-lg">{{ $k->name }}</span>
                                 </label>
                             </li>
@@ -24,7 +25,7 @@
                             @foreach ($brand as $b)
                             <li class="mb-4" wire:key="{{ $b->id }}">
                                 <label for="{{ $b->slug }}" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" id="{{ $b->slug }}" value="{{ $b->id }}" class="w-4 h-4 mr-2">
+                                    <input type="checkbox" wire:model.live="selected_brand" id="{{ $b->slug }}" value="{{ $b->id }}" class="w-4 h-4 mr-2">
                                     <span class="text-lg dark:text-gray-400">{{ $b->name }}</span>
                                 </label>
                             </li>
@@ -37,31 +38,30 @@
                         <ul>
                             <li class="mb-4">
                                 <label for="" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" class="w-4 h-4 mr-2">
-                                    <span class="text-lg dark:text-gray-400">In Stock</span>
+                                    <input type="checkbox" id="featured" wire:model.live="featured" value="1" class="w-4 h-4 mr-2">
+                                    <span class="text-lg dark:text-gray-400">Unggulan</span>
                                 </label>
                             </li>
                             <li class="mb-4">
                                 <label for="" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" class="w-4 h-4 mr-2">
-                                    <span class="text-lg dark:text-gray-400">On Sale</span>
+                                    <input type="checkbox" id="in_stock" wire:model.live="in_stock" value="1" class="w-4 h-4 mr-2">
+                                    <span class="text-lg dark:text-gray-400">Tersedia</span>
                                 </label>
                             </li>
                         </ul>
                     </div>
 
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900">
-                        <h2 class="text-2xl font-bold dark:text-gray-400">Price</h2>
+                        <h2 class="text-2xl font-bold dark:text-gray-400">Harga</h2>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
-                        <div>
-                            <input type="range"
+                        <div class="font-semibold">Rp. {{ number_format($price_range, 0, ',', '.') }}</div>
+                            <input type="range" wire:model.live="price_range"
                                 class="w-full h-1 mb-4 bg-gradient-to-r from-green-100 to-green-400 rounded appearance-none cursor-pointer"
                                 max="50000000" value="1000000" step="5000">
                             <div class="flex justify-between ">
-                                <span class="inline-block text-lg font-bold text-green-400 ">Rp. 1000</span>
-                                <span class="inline-block text-lg font-bold text-green-400 ">Rp. 50000000</span>
+                                <span class="inline-block text-lg font-bold text-green-400 ">Rp. {{ number_format(0, 0, ',', '.') }}</span>
+                                <span class="inline-block text-lg font-bold text-green-400 ">Rp. {{ number_format(50000000, 0, ',', '.') }}</span>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div class="w-full px-3 lg:w-3/4">
