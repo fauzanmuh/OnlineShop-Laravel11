@@ -1,25 +1,20 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
     <section class="overflow-hidden bg-white py-11 font-poppins dark:bg-gray-800">
       <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
+        
         <div class="flex flex-wrap -mx-4">
-          <div class="w-full mb-8 md:w-1/2 md:mb-0" x-data="{ mainImage: 'https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg' }">
+          <div class="w-full mb-8 md:w-1/2 md:mb-0" x-data="{ mainImage: '{{ url ('storage', $produk->image[0])}}' }">
             <div class="sticky top-0 z-50 overflow-hidden ">
               <div class="relative mb-6 lg:mb-10 lg:h-2/4 ">
                 <img x-bind:src="mainImage" alt="" class="object-cover w-full lg:h-full ">
               </div>
               <div class="flex-wrap hidden md:flex ">
-                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg'">
-                  <img src="https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg" alt="" class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-green-500">
+
+                @foreach ($produk->image as $i)
+                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='{{ url ('storage', $i)}}'">
+                  <img src="{{ url ('storage', $i)}}" alt="{{$produk->name}}" class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-green-500">
                 </div>
-  
-                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='https://m.media-amazon.com/images/I/61XPhYGQOQL._SX679_.jpg'">
-                  <img src="https://m.media-amazon.com/images/I/61XPhYGQOQL._SX679_.jpg" alt="" class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-green-500">
-                </div>
-  
-                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='https://m.media-amazon.com/images/I/81v5JNjZ4-L._SX679_.jpg'">
-                  <img src="https://m.media-amazon.com/images/I/81v5JNjZ4-L._SX679_.jpg" alt="" class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-green-500">
-                </div>
-  
+                @endforeach
               </div>
               <div class="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                 <div class="flex flex-wrap items-center mt-6">
@@ -36,17 +31,15 @@
           </div>
           <div class="w-full px-4 md:w-1/2 ">
             <div class="lg:pl-20">
-              <div class="mb-8 ">
+              <div class="mb-8 [&>ul]:list-disc [&ul]:ml-4">
                 <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">
-                  Macbook Pro M130c90</h2>
+                  {{$produk->name}}</h2>
                 <p class="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
-                  <span>$1500.99</span>
-                  <span class="text-base font-normal text-gray-500 line-through dark:text-gray-400">$1800.99</span>
+                  <span>Rp. {{ number_format($produk->price, 0, ',', '.') }}</span>
+                  {{-- <span class="text-base font-normal text-gray-500 line-through dark:text-gray-400">15.000.000</span> --}}
                 </p>
                 <p class="max-w-md text-gray-700 dark:text-gray-400">
-                  Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                  Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta eligendi esse laboriosam ex hic magni inventore dolores numquam, veniam totam ratione iusto explicabo accusamus, sit alias, architecto voluptate officiis quaerat?
+                  {!! Str::markdown($produk->description) !!}
                 </p>
               </div>
               <div class="w-32 mb-8 ">
