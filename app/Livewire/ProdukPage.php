@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Kategori;
 use App\Models\Produk;
@@ -32,6 +34,12 @@ class ProdukPage extends Component
 
     #[Url]
     public $sort = 'latest';
+
+    // Add cart
+    public function addToCart($productId) {
+        $total_count = CartManagement::addItemToCart($productId);
+        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+    }
     public function render()
     {
         $produk = Produk::where('is_active', true);
