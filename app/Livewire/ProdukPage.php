@@ -29,6 +29,9 @@ class ProdukPage extends Component
 
     #[Url]
     public $price_range = 0;
+
+    #[Url]
+    public $sort = 'latest';
     public function render()
     {
         $produk = Produk::where('is_active', true);
@@ -50,6 +53,14 @@ class ProdukPage extends Component
 
         if($this->price_range){
             $produk->whereBetween('price', [0, $this->price_range]);
+        }
+
+        if ($this->sort == 'price') {
+            $produk->orderBy('price', 'asc');
+        }
+
+        if ($this->sort == 'latest') {
+            $produk->orderBy('created_at', 'desc');
         }
 
         $produk = $produk->paginate(5);
