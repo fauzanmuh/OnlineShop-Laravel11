@@ -7,6 +7,7 @@ use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Kategori;
 use App\Models\Produk;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -16,6 +17,8 @@ use Livewire\WithPagination;
 class ProdukPage extends Component
 {
     use WithPagination;
+    use LivewireAlert;
+
 
     #[Url]
     public $selected_kategori = [];
@@ -39,6 +42,12 @@ class ProdukPage extends Component
     public function addToCart($productId) {
         $total_count = CartManagement::addItemToCart($productId);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+
+        $this->alert('success', 'Produk ditambahkan ke keranjang', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
     }
     public function render()
     {
