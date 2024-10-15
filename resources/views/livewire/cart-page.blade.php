@@ -6,6 +6,7 @@
                 <div class="bg-white overflow-x-auto rounded-lg shadow-md p-6 mb-4">
                     <table class="w-full">
                         <thead>
+                            @if ($cartItems)
                             <tr>
                                 <th class="text-left font-semibold">Produk</th>
                                 <th class="text-left font-semibold">Harga</th>
@@ -13,6 +14,7 @@
                                 <th class="text-left font-semibold">Total</th>
                                 <th class="text-left font-semibold">Hapus</th>
                             </tr>
+                            @endif
                         </thead>
                         <tbody>
                             @forelse ($cartItems as $item)
@@ -49,23 +51,23 @@
                     <h2 class="text-lg font-semibold mb-4">Summary</h2>
                     <div class="flex justify-between mb-2">
                         <span>Subtotal</span>
-                        <span>Rp. {{ number_format($total, 0, ',', '.') }}</span>
+                        <span>Rp. {{ !empty($cartItems) ? number_format($total, 0, ',', '.') : '0' }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span>Pajak</span>
-                        <span>Rp. {{ number_format(2000, 0, ',', '.') }}</span>
+                        <span>Rp. {{ !empty($cartItems) ? number_format(2000, 0, ',', '.') : '0' }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span>Ongkos Kirim</span>
-                        <span>Rp. {{ number_format(0, 0, ',', '.') }}</span>
+                        <span>Rp. {{ !empty($cartItems) ? number_format(0, 0, ',', '.') : '0' }}</span>
                     </div>
                     <hr class="my-2">
                     <div class="flex justify-between mb-2">
                         <span class="font-semibold">Total</span>
-                        <span class="font-semibold">Rp. {{ number_format($total + 2000, 0, ',', '.') }}</span>
+                        <span class="font-semibold">Rp. {{ !empty($cartItems) ? number_format($total + 2000, 0, ',', '.') : '0' }}</span>
                     </div>
                     @if ($cartItems)
-                    <button class="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>    
+                    <button class="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                     @endif
                 </div>
             </div>
