@@ -26,18 +26,25 @@ Route::get('/kategori', KategoriPage::class);
 Route::get('/produk', ProdukPage::class);
 Route::get('/cart', CartPage::class);
 Route::get('/produk/{slug}', DetailProdukPage::class)->name('produk.show');
-Route::get('/checkout', CheckoutPage::class);
-Route::get('/my-order', MyOrderPage::class);
-Route::get('/my-order/{order}', MyOrderDetailPage::class);
 
 /**
  * Authentication Routes
  */
+ Route::middleware('guest')->group(function () {
+    Route::get('/login', LoginPage::class);
+    Route::get('/register', RegisterPage::class);
+    Route::get('/forgot-password',ForgotPasswordPage::class);
+    Route::get('/reset-password', ResetPasswordPage::class);
+ });
 
- Route::get('/login', LoginPage::class);
- Route::get('/register', RegisterPage::class);
- Route::get('/forgot-password',ForgotPasswordPage::class);
- Route::get('/reset-password', ResetPasswordPage::class);
-
- Route::get('/sukses', SuksesPage::class);
- Route::get('/cancel', CancelPage::class);
+ Route::middleware('auth')->group(function () {
+    Route::get('/logout', function () {
+        auth()->logout();
+        return redirect('/');
+    });
+    Route::get('/checkout', CheckoutPage::class);
+    Route::get('/my-order', MyOrderPage::class);
+    Route::get('/my-order/{order}', MyOrderDetailPage::class);
+    Route::get('/sukses', SuksesPage::class);
+    Route::get('/cancel', CancelPage::class);
+});
