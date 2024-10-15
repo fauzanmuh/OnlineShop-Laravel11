@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Produk;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 
 class CartManagement
 {
@@ -31,7 +32,7 @@ class CartManagement
                 $cartItems[] = [
                     'product_id' => $productId,
                     'name' => $product->name,
-                    'image' => $product->image,
+                    'image' => $product->image[0],
                     'quantity' => 1,
                     'unit_amount' => $product->price,
                     'total_amount' => $product->price
@@ -65,7 +66,7 @@ class CartManagement
                 $cartItems[] = [
                     'product_id' => $productId,
                     'name' => $product->name,
-                    'image' => $product->image,
+                    'image' => $product->image[0],
                     'quantity' => $qty,
                     'unit_amount' => $product->price,
                     'total_amount' => $product->price

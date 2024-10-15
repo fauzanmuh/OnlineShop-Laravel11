@@ -15,28 +15,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @forelse ($cartItems as $item)
+                            <tr wire:key='{{ $item['product_id'] }}'>
                                 <td class="py-4">
                                     <div class="flex items-center">
-                                        <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150"
-                                            alt="Product image">
-                                        <span class="font-semibold">Nama Produk</span>
+                                        <img class="h-16 w-16 mr-4" src="{{ url('storage', $item['image']) }}" alt="{{ $item['name'] }}">
+                                        <span class="font-semibold">{{ $item['name'] }}</span>
                                     </div>
                                 </td>
-                                <td class="py-4">$19.99</td>
+                                <td class="py-4">Rp. {{ number_format($item['unit_amount'], 0, ',', '.') }}</td>
                                 <td class="py-4">
                                     <div class="flex items-center">
-                                        <button class="border rounded-md py-2 px-4 mr-2">-</button>
-                                        <span class="text-center w-8">1</span>
-                                        <button class="border rounded-md py-2 px-4 ml-2">+</button>
+                                        <button wire:click="decreaseQty({{ $item['product_id'] }})" class="border rounded-md py-2 px-4 mr-2">-</button>
+                                        <span class="text-center w-8">{{ $item['quantity'] }}</span>
+                                        <button wire:click="increaseQty({{ $item['product_id'] }})" class="border rounded-md py-2 px-4 ml-2">+</button>
                                     </div>
                                 </td>
-                                <td class="py-4">$19.99</td>
+                                <td class="py-4">Rp. {{ number_format($item['total_amount'], 0, ',', '.') }}</td>
                                 <td><button
-                                        class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">Hapus</button>
+                                    wire:click="removeItem({{ $item['product_id'] }})" class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700"><span wire:loading.remove wire:target="removeItem({{ $item['product_id'] }})">Hapus</span><span wire:loading wire:target="removeItem({{ $item['product_id'] }}">Menghapus...</span></button>
                                 </td>
                             </tr>
-                            <!-- More product rows -->
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-4xl font-semibold text-slate-500">Keranjang belanja masih kosong</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -46,22 +50,24 @@
                     <h2 class="text-lg font-semibold mb-4">Summary</h2>
                     <div class="flex justify-between mb-2">
                         <span>Subtotal</span>
-                        <span>$19.99</span>
+                        <span>Rp. {{ number_format($total, 0, ',', '.') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span>Pajak</span>
-                        <span>$1.99</span>
+                        <span>Rp. {{ number_format(2000, 0, ',', '.') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span>Ongkos Kirim</span>
-                        <span>$0.00</span>
+                        <span>Rp. {{ number_format(0, 0, ',', '.') }}</span>
                     </div>
                     <hr class="my-2">
                     <div class="flex justify-between mb-2">
                         <span class="font-semibold">Total</span>
-                        <span class="font-semibold">$21.98</span>
+                        <span class="font-semibold">Rp. {{ number_format($total + 2000, 0, ',', '.') }}</span>
                     </div>
-                    <button class="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
+                    @if ($cartItems)
+                    <button class="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>    
+                    @endif
                 </div>
             </div>
         </div>
