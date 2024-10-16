@@ -67,7 +67,11 @@
                         <span class="font-semibold">Rp. {{ !empty($cartItems) ? number_format($total + 2000, 0, ',', '.') : '0' }}</span>
                     </div>
                     @if ($cartItems)
-                    <a href="/checkout" class="bg-green-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">Checkout</a>
+                    @auth
+                        <a href="/checkout" class="bg-green-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">Checkout</a>
+                    @else
+                        <a href="/login" class="bg-red-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">Login to Checkout</a>
+                    @endauth
                     @endif
                 </div>
             </div>
