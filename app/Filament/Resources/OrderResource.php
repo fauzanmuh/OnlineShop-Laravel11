@@ -53,9 +53,7 @@ class OrderResource extends Resource
                     Select::make('payment_method')
                         ->options([
                             'Cash On Delivery' => 'Cash On Delivery',
-                            'Transfer Bank' => 'Transfer Bank',
-                            'E-Wallet' => 'E-Wallet',
-                            'QRIS' => 'QRIS',
+                            'Midtrans' => 'Midtrans',
                         ])
                         ->required(),
 
