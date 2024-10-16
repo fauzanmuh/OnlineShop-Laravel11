@@ -45,6 +45,6 @@ Route::get('/produk/{slug}', DetailProdukPage::class)->name('produk.show');
     Route::get('/checkout', CheckoutPage::class);
     Route::get('/my-order', MyOrderPage::class);
     Route::get('/my-order/{order}', MyOrderDetailPage::class);
-    Route::get('/sukses', SuksesPage::class);
-    Route::get('/cancel', CancelPage::class);
+    Route::get('/sukses', SuksesPage::class)->name('success');
+    Route::get('/cancel', CancelPage::class)->name('cancel');
 });
